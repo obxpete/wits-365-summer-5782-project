@@ -8,13 +8,13 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AppComponent {
   title = 'frontend';
-  messageData:object;
+  taskData:[];
   constructor(private http: HttpClient) {
 
   }
   getMessage() {
-    this.http.get<object>('/api').subscribe(data => {
-      this.messageData = data;
+    this.http.get<[]>('/api').subscribe(data => {
+      this.taskData = data;
   })  
   }
 }

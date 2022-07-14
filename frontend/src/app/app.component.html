@@ -1,3 +1,6 @@
-<p>{{messageData['message']}}</p>
+
+<div *ngFor="let taskrow of taskData">
+   {{ taskrow['task'] }}
+</div>
 
 <button class="button" (click)="getMessage()"> get the message data</button>
