@@ -1,6 +1,16 @@
+<h2>To-do list</h2>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 colHeader">Tasks</div>
+  </div>
 
-<div *ngFor="let taskrow of taskData">
-   {{ taskrow['task'] }}
+    <ul>
+      <li *ngFor="let taskrow of taskData">{{taskrow['task']}}</li>
+    </ul>
 </div>
 
-<button class="button" (click)="getTasks()"> get the task data</button>
+
+<form [formGroup]="taskForm">
+  <input class="form-control" formControlName="newTask" type="text"  style="width:330px;" length="20" />
+  <button class="button" (click)="addTask();">add task</button>
+</form>
