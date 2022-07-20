@@ -1,3 +1,24 @@
-<p>{{messageData['message']}}</p>
 
-<button class="button" (click)="getMessage()"> get the message data</button>
+
+
+
+  <h2>Hebrew Calendar API Records</h2>
+  <div class="container">
+      <div class="row">
+        <div class="col-xs-4 colHeader" >Title</div>
+        <div class="col-xs-4 colHeader" >Hebrew</div>
+        <div class="col-xs-4 colHeader" >Date</div>
+    </div>
+
+    <hr *ngIf="calendarData.length"/>
+
+    <div class="row"  *ngFor="let event of calendarData">
+        <div class="col-xs-4" >{{event.title}}</div>
+        <div class="col-xs-4" >{{event.hebrew}}</div>
+        <div class="col-xs-4" >{{event.date | date}}</div>
+    </div>
+    <hr/>
+    <button class="button" (click)="getCalendar()"> get the Calendar data</button>
+  </div>
+
+  
