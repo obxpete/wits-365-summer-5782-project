@@ -9,9 +9,10 @@ import { HttpClient } from '@angular/common/http';
 export class AppComponent {
   title = 'frontend';
   taskData:[];
+  
   constructor(private http: HttpClient) {
-
   }
+
   getTasks() {
     this.http.get<[]>('/api').subscribe(data => {
       this.taskData = data;
