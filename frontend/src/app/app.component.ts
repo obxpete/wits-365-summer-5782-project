@@ -12,7 +12,7 @@ export class AppComponent {
   constructor(private http: HttpClient) {
 
   }
-  getMessage() {
+  getTasks() {
     this.http.get<[]>('/api').subscribe(data => {
       this.taskData = data;
   })  
