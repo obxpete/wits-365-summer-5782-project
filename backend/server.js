@@ -1,20 +1,36 @@
-//server.js
-var express = require('express');
-var app = express();
-app.get('/api', function(req, res) {
-    
-    res.send(
-        [
-            {'task':'lighters'},
-            {'task':'floors'},
-            {'task':'turn off ice machine'},
-            {'task':'challah'},
-            {'task':'Set temperature heat/ac'},
-            {'task':'set the table'},
-
-        ]
-    );
-})
-var server = app.listen(8080, function() {
-    console.log("Backend Application listening at http://localhost:8080/api")
-})
+const {Connection, Request} = require("tedious");
+const executeSQL = (sql, callback) => {
+  let connection = new Connection({
+    "authentication": {
+      "options": {
+        "userName": "admin",
+        "password": "wits365summer5782"
+      },
+      "type": "default"
+    },
+    "server": "witssummer.c5ni8ntdysh1.us-east-1.rds.amazonaws.com",
+    "options": {
+      "validateBulkLoadParameters": false,
+      "rowCollectionOnRequestCompletion": true,
+      "database": "witsExamples",
+      "encrypt": true
+    }
+  });
+  connection.connect((err) => {
+    if (err)
+      return callback(err, null);
+    const request = new Request(sql, (err, rowCount, rows) => {
+      connection.close();
+      if (err)
+        return callback(err, null);
+      callback(null, {rowCount, rows});
+    });
+    connection.execSql(request);
+  });
+};
+executeSQL("select taskID, task from tasks", (err, data) => {
+  if (err)
+    console.error(err);
+  console.log(data.rowCount);
+});
+//or
