@@ -28,9 +28,11 @@ const executeSQL = (sql, callback) => {
     connection.execSql(request);
   });
 };
+
 executeSQL("select taskID, task from tasks", (err, data) => {
   if (err)
     console.error(err);
-  console.log(data.rowCount);
+  console.log(JSON.stringify(data));
 });
+
 //or
