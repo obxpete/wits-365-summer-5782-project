@@ -1,6 +1,6 @@
-const dbOperations = require('./dbOperations');
-var Db = require('./dbOperations')
 var Task = require('./task');
+var dbOperations = require('./dbOperations')
+
 
 var express = require ('express')
 var bodyParser = require('body-parser');
