@@ -4,7 +4,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatTableModule } from '@angular/material/table'  
 @NgModule({
   declarations: [
     AppComponent
@@ -12,7 +13,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   imports: [
     BrowserModule,
     HttpClientModule,
-    FormsModule, ReactiveFormsModule
+    MatTableModule,
+    FormsModule, ReactiveFormsModule, BrowserAnimationsModule
 ],
   providers: [],
   bootstrap: [AppComponent]
