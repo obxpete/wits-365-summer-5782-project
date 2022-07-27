@@ -18,6 +18,7 @@ router.use((request, response, next) =>{
 });
 
 router.route('/tasks').get((request, response) =>{
+    let result;
     dbOperations.getTasks().then(result => {
         console.log('ran request')
         console.log(result);
