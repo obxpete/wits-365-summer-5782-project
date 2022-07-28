@@ -29,6 +29,20 @@ router.route('/tasks').get((request, response) =>{
     }) 
 })
 
+router.route('/task/:taskID').get((request, response) =>{
+    let result;
+    dbOperations.getTask(request.params.taskID).then(result => {
+        response.json(result)
+    }) 
+})
+
+router.route('/add').post((request, response) =>{
+    let newTask = {... request.body};
+    dbOperations.addTask(newTask['task']).then(result => {
+        response.status(201).json(result)
+    }) 
+})
+
 var port = process.env.PORT ||  8090;
 app.listen(port);
 console.log('Task API is running at + ' + port)
