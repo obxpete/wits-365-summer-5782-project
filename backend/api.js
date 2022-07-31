@@ -15,9 +15,11 @@ app.use(bodyParser.json());
 app.use('/api', router);
 app.use(cors());
 
+
 router.use((request, response, next) =>{
     // add authentication and other logic as needed here.
-    console.log('middleware')
+    response.header("Access-Control-Allow-Origin", "*");
+    response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
 });
 
@@ -45,5 +47,5 @@ router.route('/add').post((request, response) =>{
 
 var port = process.env.PORT ||  8090;
 app.listen(port);
-console.log('Task API is running at + ' + port)
+console.log('Task API is running at + http://localhost:' + port + '/api/tasks')
 

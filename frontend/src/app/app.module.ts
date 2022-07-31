@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule } from '@angular/material/table'  
+import { MatToolbarModule } from '@angular/material/toolbar'  
 @NgModule({
   declarations: [
     AppComponent
@@ -13,7 +14,7 @@ import { MatTableModule } from '@angular/material/table'
   imports: [
     BrowserModule,
     HttpClientModule,
-    MatTableModule,
+    MatTableModule, MatToolbarModule,
     FormsModule, ReactiveFormsModule, BrowserAnimationsModule
 ],
   providers: [],

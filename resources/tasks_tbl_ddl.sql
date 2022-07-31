@@ -1,3 +1,7 @@
+USE witsExamples;
+
+GO
+
 IF EXISTS(SELECT * FROM sys.tables WHERE SCHEMA_NAME(schema_id) LIKE 'dbo' AND name like 'tasks')  
    DROP TABLE [dbo].[tasks];  
 GO

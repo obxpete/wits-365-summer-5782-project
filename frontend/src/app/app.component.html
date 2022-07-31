@@ -1,39 +1,33 @@
+
 <h2>To-do list</h2>
-<div class="container">
-  <div class="row">
-    <div class="col-xs-12 colHeader">Tasks</div>
-  </div>
-
-    <ul>
-      <li *ngFor="let taskrow of taskData">{{taskrow['task']}}</li>
-    </ul>
-</div>
 
 
-<form [formGroup]="taskForm">
+
+
+<!-- <form [formGroup]="taskForm">
   <input class="form-control" formControlName="newTask" type="text"  style="width:330px;" length="20" />
   <button class="button" (click)="addTask();">add task</button>
-</form>
+</form> -->
 
-
+<!-- <pre>  {{ ELEMENT_DATA |json }}</pre> -->
 
 
 <hr>
 <div class="example-container mat-elevation-z8">
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8" >
 
   <!--- Note that these columns can be defined in any order.
         The actual rendered columns are set as a property on the row definition" -->
 
   <!-- Position Column -->
   <ng-container matColumnDef="taskID">
-    <th mat-header-cell *matHeaderCellDef> id </th>
+    <th mat-header-cell *matHeaderCellDef> Task ID </th>
     <td mat-cell *matCellDef="let element"> {{element.taskID}} </td>
   </ng-container>
 
   <!-- Name Column -->
   <ng-container matColumnDef="task">
-    <th mat-header-cell *matHeaderCellDef> task label </th>
+    <th mat-header-cell *matHeaderCellDef> Task </th>
     <td mat-cell *matCellDef="let element"> {{element.task}} </td>
   </ng-container>
 
@@ -41,3 +35,6 @@
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
 </div>
+
+
+<!-- <button class="button" (click)="getTasks()">get tasks</button> -->

@@ -9,15 +9,15 @@ import { MatTable, MatTableDataSource} from '@angular/material/table';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
-  title = 'frontend';
-  displayedColumns: string[] = ['taskID', 'task'];
+  title = ' My WITS 365 App';
 
   ELEMENT_DATA: task[] = [{
     'taskID': 0,
     'task': ''
   }]
 
-
+  // MAT TABLE
+  displayedColumns: string[] = ['taskID', 'task'];
   dataSource = new MatTableDataSource<task>(this.ELEMENT_DATA);
  
 
@@ -33,16 +33,16 @@ export class AppComponent implements OnInit{
 
   // ngOnInit runs when the component loads
   ngOnInit(): void {
-  this.ELEMENT_DATA = [{taskID: 1, task: 'Hydrogen'}]
+    this.getTasks();
+  }
 
+  getTasks() {
     this.http.get<[]>('http://localhost:8090/api/tasks').subscribe(data => {
       this.taskData = data;
       this.ELEMENT_DATA = data['recordset'].map(task => {return {taskID: task.taskID, task: task.task}})
       this.dataSource = new MatTableDataSource<task>(this.ELEMENT_DATA);
-      console.log(this.ELEMENT_DATA)
     })  
   }
-
 
   addTask() {
     this.taskData.push({task:this.taskForm.get('newTask').value});
