@@ -44,10 +44,6 @@ export class AppComponent implements OnInit{
     })  
   }
 
-  addTask() {
-    this.taskData.push({task:this.taskForm.get('newTask').value});
-    this.taskForm.get('newTask').reset()
-  }
 
 }
 
