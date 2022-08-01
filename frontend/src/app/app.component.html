@@ -2,14 +2,21 @@
 <h2>To-do list</h2>
 
 
-
-
-<!-- <form [formGroup]="taskForm">
-  <input class="form-control" formControlName="newTask" type="text"  style="width:330px;" length="20" />
-  <button class="button" (click)="addTask();">add task</button>
-</form> -->
-
 <!-- <pre>  {{ ELEMENT_DATA |json }}</pre> -->
+
+
+<!-- Add Task Form Here -->
+<div class="matform-container">
+  <form [formGroup]="taskForm">
+
+    <mat-form-field hintLabel="Max 10 characters"  >
+      <mat-label>Enter some input</mat-label>
+      <input matInput #input maxlength="10" placeholder="Ex. Nougat">
+      <mat-hint >{{input.value?.length || 0}}/10</mat-hint>
+    </mat-form-field>
+    <button mat-button color="primary" >Submit</button>
+  </form> 
+</div>
 
 
 <hr>
@@ -37,4 +44,3 @@
 </div>
 
 
-<!-- <button class="button" (click)="getTasks()">get tasks</button> -->
