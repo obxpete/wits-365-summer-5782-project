@@ -10,6 +10,7 @@ import { MatToolbarModule } from '@angular/material/toolbar'
 // update imports here
 import { MatFormFieldModule} from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatPaginatorModule } from '@angular/material/paginator'
 
 
 @NgModule({
@@ -21,7 +22,7 @@ import { MatInputModule } from '@angular/material/input';
     HttpClientModule,
     
     // and here (imports array)
-    
+    MatPaginatorModule, MatTableModule,
     FormsModule, ReactiveFormsModule, BrowserAnimationsModule
 ],
   providers: [],
