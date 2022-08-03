@@ -62,7 +62,9 @@ export class AppComponent implements OnInit{
   // add updateTask function here
 
 
-
+// add delete task function here
+  
+  
 }
 
 
