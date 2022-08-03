@@ -33,13 +33,21 @@ async function updateTask(taskObj)
     return result // sql just returns the task object it created
 }
 
+// Delete A TASK
+async function deleteTask(taskID) 
+{
+    let pool = await sql.connect(config);
+    let result = await pool.request().query(`delete tasks where taskID = '${taskID}'; `);
+    return result // sql just returns the task object it created
+}
 
 module.exports =  {
     getTasks : getTasks,
     getTask: getTask,
     addTask: addTask,
     // replace this line with updateTask export
-    updateTask: updateTask
+    updateTask: updateTask,
+    deleteTask: deleteTask
 }
 
 

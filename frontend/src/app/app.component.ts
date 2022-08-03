@@ -86,8 +86,12 @@ export class AppComponent implements OnInit{
       this.taskUpdateForm.reset()
     });
   }
-  changeChosenTaskID(e) {
-    console.log(e)
+
+  // add delete task function here
+  delete(taskID) {
+    this.http.get<[]>(`http://localhost:8090/api/delete/${taskID}`).subscribe(data => {
+      this.getTasks()
+    })  
   }
   
 }
