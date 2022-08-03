@@ -1,6 +1,7 @@
-import { Component , OnInit} from '@angular/core';
+import { Component , OnInit, ViewChild} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {  FormGroup,  Validators,  FormBuilder} from '@angular/forms';
+import { MatPaginator } from '@angular/material/paginator';
 
 // update imports here
 import { MatTable, MatTableDataSource} from '@angular/material/table';
@@ -13,6 +14,10 @@ import { MatFormField} from '@angular/material/form-field';
 })
 export class AppComponent implements OnInit{
   title = ' My WITS 365 App';
+
+  //paginator viewchild here
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
 
   ELEMENT_DATA: task[] = [{
     'taskID': 0,
@@ -38,6 +43,11 @@ export class AppComponent implements OnInit{
   // ngOnInit runs when the component loads
   ngOnInit(): void {
     this.getTasks();
+  }
+  
+  //ngAfterViewInit here
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
   }
 
   getTasks() {
