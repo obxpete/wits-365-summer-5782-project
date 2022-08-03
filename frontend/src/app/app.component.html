@@ -14,7 +14,7 @@
       <mat-label>Enter a task</mat-label>
       <input matInput #input maxlength="40" placeholder="Ex. set the light timers" formControlName="newTask">
     </mat-form-field>
-    <button mat-button color="primary" (click)="addNewTask()">Submit</button>
+    <button mat-raised-button color="primary" (click)="addNewTask()">Submit</button>
   </form> 
 </div>
 
@@ -54,14 +54,17 @@
 <h4>Update a task</h4>
 <div class="matform-container">
   <form [formGroup]="taskUpdateForm" autocomplete="off">
-    <mat-form-field  >
-      <mat-label>Select a task</mat-label>   
-      <input matInput type="text" #existingTaskID formControlName="existingTaskID" aria-label="Select tasl by id"><br/>
-    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Select a task</mat-label>
+      <mat-select matInput #existingTaskID formControlName="existingTaskID" (selectionChange)="taskUpdateForm.controls['existingTask'].patchValue($event.source.triggerValue);">
+        <mat-option *ngFor="let task of ELEMENT_DATA" [value]="task.taskID">
+          {{task.task}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field> &nbsp; &nbsp;
     <mat-form-field >
       <input matInput #updateTaskInput maxlength="40" placeholder="Ex. set the light timers" formControlName="existingTask" aria-label="Edit task label">
-      <!-- <mat-hint >{{updateTaskInput.value?.length || 0}}/10</mat-hint> -->
     </mat-form-field>
-    <button mat-button color="primary" (click)="updateTask()">Submit</button> 
+    <button  mat-raised-button color="primary" (click)="updateTask();">Submit</button> 
   </form> 
 </div>

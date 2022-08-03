@@ -2,7 +2,7 @@ import { Component , OnInit, ViewChild} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormGroup,  Validators,  FormBuilder } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
-
+import { MatSelect } from '@angular/material/select'
 // update imports here
 import { MatTable, MatTableDataSource} from '@angular/material/table';
 import { MatFormField} from '@angular/material/form-field';
@@ -80,12 +80,14 @@ export class AppComponent implements OnInit{
   // add updateTask function here
   
   updateTask() {
-    this.http.post<any>('http://localhost:8090/api/update', {taskID: this.taskUpdateForm.get('existingTaskID').value,  task:this.taskUpdateForm.get('existingTask').value }).subscribe(data => {
+    this.http.post<any>('http://localhost:8090/api/update', {taskID: this.taskUpdateForm.controls['existingTaskID'].value ,  task:this.taskUpdateForm.controls['existingTask'].value }).subscribe(data => {
       // insert getTasks() call to update our table
       this.getTasks();
       this.taskUpdateForm.reset()
     });
-    
+  }
+  changeChosenTaskID(e) {
+    console.log(e)
   }
   
 }

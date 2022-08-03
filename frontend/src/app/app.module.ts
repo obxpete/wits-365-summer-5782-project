@@ -12,7 +12,8 @@ import { MatToolbarModule } from '@angular/material/toolbar'
 import { MatFormFieldModule} from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule } from '@angular/material/paginator'
-
+import { MatSelectModule } from '@angular/material/select'
+import { MatButtonModule } from '@angular/material/button'
 @NgModule({
   declarations: [
     AppComponent
@@ -23,9 +24,10 @@ import { MatPaginatorModule } from '@angular/material/paginator'
 
     // and here (imports array)
     MatTableModule, MatToolbarModule, 
-    MatPaginatorModule,
+    MatPaginatorModule,MatSelectModule,
 
-    MatFormFieldModule, MatInputModule,
+    MatFormFieldModule, 
+    MatInputModule, MatButtonModule,
     FormsModule, ReactiveFormsModule, BrowserAnimationsModule
 ],
   providers: [],
