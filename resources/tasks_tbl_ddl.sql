@@ -14,6 +14,6 @@ CREATE TABLE tasks (
 
 
 INSERT INTO tasks (task)
-VALUES ('bring in the dog'), ('put out the kat'), ('yakaty yak'), ('don''t talk back');
+VALUES ('Put oil in Lichhers'), ('Clear and set diningroom table'), ('Bake Challah'), ('Set clean sheets for guests.'), ('Put up the blech'), ('Turn off all electronics');
 
 select taskID, task from tasks
