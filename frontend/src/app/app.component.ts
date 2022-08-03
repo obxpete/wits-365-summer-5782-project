@@ -58,8 +58,13 @@ export class AppComponent implements OnInit{
     })  
   }
 
-  addTask() {
-    this.taskData.push({task:this.taskForm.get('newTask').value});
+  addNewTask() {
+    // this.taskData.push({task:this.taskForm.get('newTask').value});
+    this.http.post<any>('http://localhost:8090/api/add', {task:this.taskForm.get('newTask').value }).subscribe(data => {
+      // insert getTasks() call to update our table
+      this.getTasks();
+    });
+    
     this.taskForm.get('newTask').reset()
   }
 

@@ -40,6 +40,7 @@ router.route('/task/:taskID').get((request, response) =>{
 
 router.route('/add').post((request, response) =>{
     let newTask = {... request.body};
+    console.log(newTask)
     dbOperations.addTask(newTask['task']).then(result => {
         response.status(201).json(result)
     }) 
