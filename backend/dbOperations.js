@@ -25,10 +25,13 @@ async function addTask(task)
     return newTask // sql just returns the task object it created
 }
 
+// Insert UPDATE A TASK
+
 
 module.exports =  {
     getTasks : getTasks,
     getTask: getTask,
+    // replace this line with updateTask export
     addTask: addTask
 }
 
