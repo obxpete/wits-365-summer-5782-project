@@ -25,11 +25,21 @@ async function addTask(task)
     return newTask // sql just returns the task object it created
 }
 
+// UPDATE A TASK
+async function updateTask(taskObj) 
+{
+    let pool = await sql.connect(config);
+    let result = await pool.request().query(`UPDATE tasks set task = '${taskObj['task']}' where taskID = '${taskObj['taskID']}'; `);
+    return result // sql just returns the task object it created
+}
+
 
 module.exports =  {
     getTasks : getTasks,
     getTask: getTask,
-    addTask: addTask
+    addTask: addTask,
+    // replace this line with updateTask export
+    updateTask: updateTask
 }
 
 

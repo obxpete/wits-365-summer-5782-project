@@ -46,6 +46,14 @@ router.route('/add').post((request, response) =>{
     }) 
 })
 
+// Insert Update Route Here
+router.route('/update/').post((request, response) =>{
+    let task = {... request.body};
+    dbOperations.updateTask({taskID: task.taskID,  task:task.task }).then(result => {
+        response.status(201).json(result)
+    }) 
+})
+
 var port = process.env.PORT ||  8090;
 app.listen(port);
 console.log('Task API is running at + http://localhost:' + port + '/api/tasks')

@@ -1,6 +1,6 @@
 import { Component , OnInit, ViewChild} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import {  FormGroup,  Validators,  FormBuilder} from '@angular/forms';
+import { FormGroup,  Validators,  FormBuilder } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 
 // update imports here
@@ -12,6 +12,7 @@ import { MatFormField} from '@angular/material/form-field';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
 export class AppComponent implements OnInit{
   title = ' My WITS 365 App';
 
@@ -30,6 +31,8 @@ export class AppComponent implements OnInit{
  
 
   taskForm : FormGroup;
+  // initialize taskUpdate form here
+  taskUpdateForm : FormGroup;
   taskData:object[];
     
   
@@ -37,6 +40,12 @@ export class AppComponent implements OnInit{
     //basic angular form
     this.taskForm = this.formBuilder.group({
       newTask: this.formBuilder.control(''),
+    })
+
+    //Insert updateTask form here
+    this.taskUpdateForm = this.formBuilder.group({
+      existingTaskID: this.formBuilder.control(0),
+      existingTask: this.formBuilder.control(''),
     })
   }
 
@@ -67,7 +76,18 @@ export class AppComponent implements OnInit{
     
     this.taskForm.get('newTask').reset()
   }
-
+  
+  // add updateTask function here
+  
+  updateTask() {
+    this.http.post<any>('http://localhost:8090/api/update', {taskID: this.taskUpdateForm.get('existingTaskID').value,  task:this.taskUpdateForm.get('existingTask').value }).subscribe(data => {
+      // insert getTasks() call to update our table
+      this.getTasks();
+      this.taskUpdateForm.reset()
+    });
+    
+  }
+  
 }
 
 
