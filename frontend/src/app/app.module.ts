@@ -7,10 +7,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule } from '@angular/material/table'  
 import { MatToolbarModule } from '@angular/material/toolbar'  
-// update imports here
 import { MatFormFieldModule} from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule } from '@angular/material/paginator'
+import { MatSelectModule } from '@angular/material/select'
+import { MatButtonModule } from '@angular/material/button'
+
 
 
 @NgModule({
@@ -21,10 +23,13 @@ import { MatPaginatorModule } from '@angular/material/paginator'
     BrowserModule,
     HttpClientModule,
     
-    // and here (imports array)
+    MatFormFieldModule, MatInputModule,
     MatToolbarModule,
     MatPaginatorModule, MatTableModule,
-    FormsModule, ReactiveFormsModule, BrowserAnimationsModule
+    FormsModule, ReactiveFormsModule, BrowserAnimationsModule,
+    MatSelectModule,
+    MatFormFieldModule, 
+    MatInputModule, MatButtonModule,
 ],
   providers: [],
   bootstrap: [AppComponent]

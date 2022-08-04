@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { FormGroup,  Validators,  FormBuilder} from '@angular/forms';
 import { MatTable, MatTableDataSource} from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatSelect } from '@angular/material/select'
 
 // update imports here
 
@@ -28,7 +29,7 @@ export class AppComponent implements OnInit{
  
 
   taskForm : FormGroup;
-   // initialize taskUpdate form here
+  taskUpdateForm : FormGroup;
   taskData:object[];
     
   constructor(private http: HttpClient,private formBuilder: FormBuilder) {
@@ -37,7 +38,10 @@ export class AppComponent implements OnInit{
       newTask: this.formBuilder.control(''),
     });
 
-    //Insert updateTask form here
+    this.taskUpdateForm = this.formBuilder.group({
+      existingTaskID: this.formBuilder.control(0),
+      existingTask: this.formBuilder.control(''),
+    })
 
   }
 
@@ -59,10 +63,31 @@ export class AppComponent implements OnInit{
     })  
   }
   
-  // add updateTask function here
+   addNewTask() {
+    // this.taskData.push({task:this.taskForm.get('newTask').value});
+    this.http.post<any>('http://localhost:8090/api/add', {task:this.taskForm.get('newTask').value }).subscribe(data => {
+      // insert getTasks() call to update our table
+      this.getTasks();
+    });
+    
+    this.taskForm.get('newTask').reset()
+  }
+
+  updateTask() {
+    this.http.post<any>('http://localhost:8090/api/update', {taskID: this.taskUpdateForm.controls['existingTaskID'].value ,  task:this.taskUpdateForm.controls['existingTask'].value }).subscribe(data => {
+     // insert getTasks() call to update our table
+     this.getTasks();
+     this.taskUpdateForm.reset()
+   });
+}
 
 
-// add delete task function here
+
+delete(taskID) {
+  this.http.get<[]>(`http://localhost:8090/api/delete/${taskID}`).subscribe(data => {
+    this.getTasks()
+  })  
+}
   
   
 }
