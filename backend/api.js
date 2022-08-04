@@ -46,11 +46,20 @@ router.route('/add').post((request, response) =>{
 })
 
 
+router.route('/update/').post((request, response) =>{
+    let task = {... request.body};
+    dbOperations.updateTask({taskID: task.taskID,  task:task.task }).then(result => {
+        response.status(201).json(result)
+    }) 
+})
 
-// Insert Update Route Here
 
-
-// Insert Delete Route Here
+router.route('/delete/:taskID').get((request, response) =>{
+    let result
+    dbOperations.deleteTask(request.params.taskID).then(result => {
+        response.status(201).json(result)
+    }) 
+})
 
 var port = process.env.PORT ||  8090;
 app.listen(port);
