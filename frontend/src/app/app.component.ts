@@ -20,8 +20,10 @@ export class AppComponent implements OnInit{
 
   ELEMENT_DATA: task[] = [{
     'taskID': 0,
-    'task': ''
+    'task': '',
+    'taskDueDate': ''
   }]
+  
 
   // MAT TABLE
   displayedColumns: string[] = ['taskID', 'task'];
@@ -36,11 +38,13 @@ export class AppComponent implements OnInit{
     //basic angular form
     this.taskForm = this.formBuilder.group({
       newTask: this.formBuilder.control(''),
+      newTaskDueDate: this.formBuilder.control('')
     });
 
     this.taskUpdateForm = this.formBuilder.group({
       existingTaskID: this.formBuilder.control(0),
       existingTask: this.formBuilder.control(''),
+      existingTaskDueDate: this.formBuilder.control('')
     })
 
   }
@@ -58,28 +62,25 @@ export class AppComponent implements OnInit{
   getTasks() {
     this.http.get<[]>('http://localhost:8090/api/tasks').subscribe(data => {
       this.taskData = data;
-      this.ELEMENT_DATA = data['recordset'].map(task => {return {taskID: task.taskID, task: task.task}})
+      this.ELEMENT_DATA = data['recordset'].map(task => {return {taskID: task.taskID, task: task.task, taskDueDate: task.taskDueDate}})
       this.dataSource = new MatTableDataSource<task>(this.ELEMENT_DATA);
     })  
   }
 
   addNewTask() {
-    // this.taskData.push({task:this.taskForm.get('newTask').value});
-    this.http.post<any>('http://localhost:8090/api/add', {task:this.taskForm.get('newTask').value }).subscribe(data => {
+    this.http.post<any>('http://localhost:8090/api/add', {task:this.taskForm.get('newTask').value, taskDueDate: new Date(this.taskForm.get('newTaskDueDate').value).toDateString() }).subscribe(data => {
       // insert getTasks() call to update our table
       this.getTasks();
     });
-    
-    this.taskForm.get('newTask').reset()
   }
 
   updateTask() {
-    this.http.post<any>('http://localhost:8090/api/update', {taskID: this.taskUpdateForm.controls['existingTaskID'].value ,  task:this.taskUpdateForm.controls['existingTask'].value }).subscribe(data => {
-     // insert getTasks() call to update our table
-     this.getTasks();
+    this.http.post<any>('http://localhost:8090/api/update', {taskID: this.taskUpdateForm.controls['existingTaskID'].value ,  task:this.taskUpdateForm.controls['existingTask'].value, taskDueDate: this.taskUpdateForm.controls['existingTaskDueDate'].value}).subscribe(data => {
+
      this.taskUpdateForm.reset()
-   });
-}
+     this.getTasks()
+   })  
+ }
 
 
 delete(taskID) {
@@ -95,4 +96,5 @@ delete(taskID) {
 export interface task {
   taskID: number;
   task: string;
+  taskDueDate: string;
 }
