@@ -5,7 +5,7 @@ const sql = require('mssql');
 async function getTasks() 
 {
     let pool = await sql.connect(config);
-    let tasks = await pool.request().query(" select taskID, task from tasks");
+    let tasks = await pool.request().query(" select taskID, task, taskDueDate from tasks");
     return tasks
 }
 
@@ -18,10 +18,10 @@ async function getTask(taskID)
 }
 
 // ADD A TASK
-async function addTask(task) 
+async function addTask(task, taskDueDate) 
 {
     let pool = await sql.connect(config);
-    let newTask = await pool.request().query(`INSERT INTO tasks (task) VALUES ('${task}'); `);
+    let newTask = await pool.request().query(`INSERT INTO tasks (task, taskDueDate) VALUES ('${task}', '${new Date(taskDueDate).toDateString()}') `);
     return newTask // sql just returns the task object it created
 }
 
@@ -29,7 +29,7 @@ async function addTask(task)
 async function updateTask(taskObj) 
 {
     let pool = await sql.connect(config);
-    let result = await pool.request().query(`UPDATE tasks set task = '${taskObj['task']}' where taskID = '${taskObj['taskID']}'; `);
+    let result = await pool.request().query(`UPDATE tasks set task = '${taskObj['task']}', taskDueDate = '${new Date(taskObj['taskDueDate']).toDateString()}' where taskID = ${taskObj['taskID']}; `);
     return result // sql just returns the task object it created
 }
 

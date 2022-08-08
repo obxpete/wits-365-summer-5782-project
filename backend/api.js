@@ -41,7 +41,7 @@ router.route('/task/:taskID').get((request, response) =>{
 router.route('/add').post((request, response) =>{
     let newTask = {... request.body};
     console.log(newTask)
-    dbOperations.addTask(newTask['task']).then(result => {
+    dbOperations.addTask(newTask['task'], newTask['taskDueDate']).then(result => {
         response.status(201).json(result)
     }) 
 })
@@ -49,7 +49,9 @@ router.route('/add').post((request, response) =>{
 // Insert Update Route Here
 router.route('/update/').post((request, response) =>{
     let task = {... request.body};
-    dbOperations.updateTask({taskID: task.taskID,  task:task.task }).then(result => {
+    console.log(task)
+
+    dbOperations.updateTask({taskID: task.taskID,  task:task.task, taskDueDate: task.taskDueDate }).then(result => {
         response.status(201).json(result)
     }) 
 })

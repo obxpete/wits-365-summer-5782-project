@@ -14,6 +14,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule } from '@angular/material/paginator'
 import { MatSelectModule } from '@angular/material/select'
 import { MatButtonModule } from '@angular/material/button'
+import { MatDatepickerModule , } from '@angular/material/datepicker'
+import { MatMomentDateModule } from "@angular/material-moment-adapter";
 @NgModule({
   declarations: [
     AppComponent
@@ -29,7 +31,8 @@ import { MatButtonModule } from '@angular/material/button'
     MatFormFieldModule, 
     MatInputModule, MatButtonModule,
     FormsModule, ReactiveFormsModule, BrowserAnimationsModule
-],
+    ,MatDatepickerModule,MatMomentDateModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })
